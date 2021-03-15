@@ -82,19 +82,27 @@ def evaluate(model, x, y):
 
 def main():
     """Train model and evaluate on test data."""
+    print("Create a model")
     model = ConvNet()
-    # Load model.
+    print("Load model.")
     if os.path.exists("model.pt"):
         model.load_state_dict(torch.load("model.pt"))
     # Load train and test data.
+    print("Load train data")
     mnist_train = torchvision.datasets.MNIST("data", download=True)
+    print("transform")
     x_train, y_train = transform(mnist_train)
+    print("Load test data")
     mnist_test = torchvision.datasets.MNIST("data", download=True, train=False)
+    print("transform")
     x_test, y_test = transform(mnist_test)
     # Train model.
+    print("Train")
     train(model, x_train, y_train)
+    print("Save model")
     torch.save(model.state_dict(), "model.pt")
     # Evaluate.
+    print("Evaluate")
     evaluate(model, x_test, y_test)
 
 
