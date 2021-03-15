@@ -45,13 +45,21 @@ def transform(dataset):
 
 def train(model, x, y):
     """Train a single epoch."""
+    print("Model train")
     model.train()
+    print("criterion")
     criterion = torch.nn.CrossEntropyLoss()
+    print("Optimizer")
     optimizer = torch.optim.Adam(model.parameters())
+    print("y_pred")
     y_pred = model(x)
+    print("loss")
     loss = criterion(y_pred, y)
+    print("optimizer.zero_grad()")
     optimizer.zero_grad()
+    print("loss.backward")
     loss.backward()
+    print("optimizer.step()")
     optimizer.step()
 
 
